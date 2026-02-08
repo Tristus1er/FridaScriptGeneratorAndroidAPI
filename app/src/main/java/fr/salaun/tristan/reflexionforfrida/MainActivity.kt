@@ -30,6 +30,10 @@ import kotlin.reflect.jvm.jvmName
 class MainActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "MainActivity"
+        private const val OUTPUT_FILENAME = "observer_crypto.js"
+        private const val OUTPUT_EVENT_TYPE = "crypto"
+//        private const val OUTPUT_TEMPLATE = "frida_script.ftl"
+        private const val OUTPUT_TEMPLATE = "frida_script_events.ftl"
     }
 
     // Class to get statistics
@@ -84,11 +88,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Load the FreeMarker template.
-//        val template = cfg.getTemplate("frida_script.ftl")
-        val template = cfg.getTemplate("frida_script_events.ftl")
+        val template = cfg.getTemplate(OUTPUT_TEMPLATE)
 
         // Prepare the data to inject.
-        val dataModel = mapOf("model" to model, "scriptName" to "observer_crypto.js", "eventType" to "crypto")
+        val dataModel = mapOf("model" to model, "scriptName" to OUTPUT_FILENAME, "eventType" to OUTPUT_EVENT_TYPE)
 
         // Generate the output with the template.
         val out = StringWriter()
@@ -96,7 +99,6 @@ class MainActivity : AppCompatActivity() {
 
         // Display the content generated.
         edContent.setText(out.toString())
-
     }
 
     // Get documentation from web site.
