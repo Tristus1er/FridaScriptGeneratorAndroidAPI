@@ -4,6 +4,10 @@ An Android application that **automatically generates [Frida](https://frida.re/)
 
 Instead of manually writing Frida hooks for every constructor and method of a class, this app inspects the target class at runtime via reflection and produces a ready-to-use JavaScript hook script.
 
+## Screenshot
+How it looks like.
+![Main screen screenshot](./doc/screenshot_main_screen.png "Main screen screenshot")
+
 ## How It Works
 
 1. **Kotlin Reflection** — The app uses `kotlin-reflect` to enumerate all constructors and public methods of the target class, including parameter types and return types.
