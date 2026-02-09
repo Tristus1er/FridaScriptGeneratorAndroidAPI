@@ -1,27 +1,30 @@
 package fr.salaun.tristan.reflexionforfrida
 
+import fr.salaun.tristan.reflexionforfrida.model.ClassModel
+import fr.salaun.tristan.reflexionforfrida.model.Method
+import fr.salaun.tristan.reflexionforfrida.model.Parameter
 import freemarker.template.DefaultObjectWrapper
 import freemarker.template.TemplateModel
 import freemarker.template.TemplateModelException
 import freemarker.template.Version
 
 /**
- * This class is mandatory under Android to avoid the error: java.lang.ClassNotFoundException: Didn't find class "java.beans.Introspector"
- * It allows to perform "hardcoded reflexion".
+ * Custom FreeMarker object wrapper for Android.
+ * Avoids using java.beans.Introspector which is not available on Android.
+ * Converts data classes to Maps for FreeMarker template processing.
  */
 class AndroidSafeObjectWrapper(cfgVersion: Version) : DefaultObjectWrapper(cfgVersion) {
     @Throws(TemplateModelException::class)
     override fun wrap(obj: Any?): TemplateModel? {
         return when (obj) {
-            is MainActivity.Parameter -> wrapParameterWithoutIntrospection(obj)
-            is MainActivity.Method -> wrapMethodWithoutIntrospection(obj)
-            is MainActivity.Model -> wrapModelWithoutIntrospection(obj)
+            is Parameter -> wrapParameter(obj)
+            is Method -> wrapMethod(obj)
+            is ClassModel -> wrapClassModel(obj)
             else -> super.wrap(obj)
         }
     }
 
-    private fun wrapParameterWithoutIntrospection(obj: MainActivity.Parameter): TemplateModel {
-        // Custom wrapping logic to avoid introspection.
+    private fun wrapParameter(obj: Parameter): TemplateModel {
         return super.wrap(
             mapOf(
                 "name" to obj.name,
@@ -30,8 +33,7 @@ class AndroidSafeObjectWrapper(cfgVersion: Version) : DefaultObjectWrapper(cfgVe
         )
     }
 
-    private fun wrapMethodWithoutIntrospection(obj: MainActivity.Method): TemplateModel {
-        // Custom wrapping logic to avoid introspection.
+    private fun wrapMethod(obj: Method): TemplateModel {
         return super.wrap(
             mapOf(
                 "name" to obj.name,
@@ -41,8 +43,7 @@ class AndroidSafeObjectWrapper(cfgVersion: Version) : DefaultObjectWrapper(cfgVe
         )
     }
 
-    private fun wrapModelWithoutIntrospection(obj: MainActivity.Model): TemplateModel {
-        // Custom wrapping logic to avoid introspection.
+    private fun wrapClassModel(obj: ClassModel): TemplateModel {
         return super.wrap(
             mapOf(
                 "name" to obj.name,

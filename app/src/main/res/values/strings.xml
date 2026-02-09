@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">ReflexionForFrida</string>
+    <string name="hint_class_name">Fully qualified class name (e.g. javax.crypto.Cipher)</string>
+    <string name="template_console">Console</string>
+    <string name="template_events">Events</string>
+    <string name="generate">Generate Frida Script</string>
+    <string name="copy">Copy</string>
+    <string name="share">Share</string>
+    <string name="share_script">Share Frida script</string>
+    <string name="generating">Generating script…</string>
+    <string name="copied_to_clipboard">Script copied to clipboard</string>
+    <string name="error_empty_class">Please enter a class name</string>
+    <string name="stats_format">%1$s: %2$d/%3$d matched | %4$d not found | %5$d ambiguous</string>
+    <string name="error_format">Error: %1$s</string>
 </resources>

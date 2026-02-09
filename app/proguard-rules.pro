@@ -5,17 +5,26 @@
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Keep line number information for debugging stack traces.
+-keepattributes SourceFile,LineNumberTable
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Kotlin Reflect - needed for reflection-based analysis
+-keep class kotlin.reflect.** { *; }
+-keep class kotlin.Metadata { *; }
+-keepattributes RuntimeVisibleAnnotations
+-keepattributes *Annotation*
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Keep data model classes used by FreeMarker templates
+-keep class fr.salaun.tristan.reflexionforfrida.model.** { *; }
+
+# FreeMarker template engine
+-keep class freemarker.** { *; }
+-dontwarn freemarker.**
+
+# OpenBeans (java.beans replacement for Android)
+-keep class me.champeau.openbeans.** { *; }
+-dontwarn me.champeau.openbeans.**
+
+# JSoup HTML parser
+-keep class org.jsoup.** { *; }
+-dontwarn org.jsoup.**

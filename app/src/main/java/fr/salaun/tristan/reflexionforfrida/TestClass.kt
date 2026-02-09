@@ -54,15 +54,20 @@ class TestClass {
     fun simpleParam(longArrayOf: LongArray) {}
     fun simpleParam(floatArrayOf: FloatArray) {}
     fun simpleParam(doubleArrayOf: DoubleArray) {}
+    @OptIn(ExperimentalUnsignedTypes::class)
     fun simpleParam(ubyteArrayOf: UByteArray) {}
+    @OptIn(ExperimentalUnsignedTypes::class)
     fun simpleParam(ushortArrayOf: UShortArray) {}
+    @OptIn(ExperimentalUnsignedTypes::class)
     fun simpleParam(uintArrayOf: UIntArray) {}
+    @OptIn(ExperimentalUnsignedTypes::class)
     fun simpleParam(ulongArrayOf: ULongArray) {}
     fun simpleParam(booleanArrayOf: BooleanArray) {}
     fun simpleParam(charArrayOf: CharArray) {}
 //    private fun simpleParam(stringArrayOf: StringArray) {}
 
     companion object {
+        @OptIn(ExperimentalUnsignedTypes::class)
         fun callAllMethods() {
             val tc = TestClass()
             tc.simpleParam(10.toByte())
